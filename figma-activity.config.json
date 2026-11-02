@@ -2,17 +2,182 @@
   "output": "public/figma-activity.json",
   "onlyMe": true,
   "keepDays": 800,
-  "modifiedEvents": true,
-  "teamIds": [
-    "1606104166296410075",
-    "1555209071405462384",
-    "1583531390841499425"
-  ],
-  "teamDeep": false,
   "files": [
-    { "key": "tfBXpDNQ7p6uvXRSfngBAz", "project": "Blizzard World" },
-    { "key": "oqfonVDGJSyhx2Uz371bXO", "project": "Klaze Cargo" },
-    { "key": "6GfZwkgYdurx0JeKfVYIT9", "project": "Solfácil" },
-    { "key": "Jxg8qKInRP1zM8ky4L6YkK", "project": "Death Stranding 2" }
+    {
+      "key": "x85mWKP3bYKhbywJjOfVt1",
+      "project": "Protótipo (x85mWK)"
+    },
+    {
+      "key": "m5p7Ti7avGqtOwXKdm0N5H",
+      "project": "Projeto Game app"
+    },
+    {
+      "key": "NbZEmQh3WaDn6EV0Fi5XyJ",
+      "project": "Twitch Bbychyuq"
+    },
+    {
+      "key": "ibWvDs770Id1hLgsVFSCJj",
+      "project": "Insta InFamous"
+    },
+    {
+      "key": "6Q1mZV2eszwiskLkeb4KET",
+      "project": "Projeto Glazzia 2025"
+    },
+    {
+      "key": "mvN1eV2ak8NOqFxqN2mnOt",
+      "project": "Mais1Café UI App Redesign"
+    },
+    {
+      "key": "VNDNMMqypOFwlVeAJAhqAi",
+      "project": "Ludens Gamer App"
+    },
+    {
+      "key": "YqBNp85jwBeLHdSKHatFZ0",
+      "project": "Copel UI App"
+    },
+    {
+      "key": "UUPm5Vh54QsO7eqBSM60pg",
+      "project": "Guia de Motéis UI Design"
+    },
+    {
+      "key": "8fs6JsYvTCMUKYxM4K5921",
+      "project": "Theo Games"
+    },
+    {
+      "key": "tGrCQyU4ZBr8Uo8p2pEtGt",
+      "project": "Social Media MFortunato"
+    },
+    {
+      "key": "U55Z5AhWi1skFViVVCXgL5",
+      "project": "Criativos Campanha Golaço da Solfácil 2026"
+    },
+    {
+      "key": "ig5bMIQEmsUPJuE1kNffIx",
+      "project": "Tom Hiddleston Brasil"
+    },
+    {
+      "key": "wT5dswZgCgJcFcpnMzbwY3",
+      "project": "Social Media Face to Face"
+    },
+    {
+      "key": "omtdU4zEVCVoRq3dGt4MHL",
+      "project": "Untitled"
+    },
+    {
+      "key": "GxEUiOgN2SsiPeh33NQmzN",
+      "project": "Solfácil RFP BID 2026"
+    },
+    {
+      "key": "SSqJiTYaYeRaTjYhvEUl6w",
+      "project": "Template Mídia Kit"
+    },
+    {
+      "key": "oApsLEDv4uWzFuHHipP2wA",
+      "project": "Conta Azul UI Design"
+    },
+    {
+      "key": "sNcwXxggD22vQWj2kUd70z",
+      "project": "REMAX Arquivos Brand"
+    },
+    {
+      "key": "gGeIt9DCIPNtj3YwlEwHm0",
+      "project": "Arquivos Murilo Roque"
+    },
+    {
+      "key": "oqfonVDGJSyhx2Uz371bXO",
+      "project": "Klaze Cargo Klabin"
+    },
+    {
+      "key": "hs2bPMNyDd3QxNq7S1BwwN",
+      "project": "God of War Ragnarok Copy"
+    },
+    {
+      "key": "dpWRtmNvohfIVqbT0hEi5K",
+      "project": "Starter File v1.0"
+    },
+    {
+      "key": "5oE8MMGq1ZAD1t4CjH5NKz",
+      "project": "THBR Arquivos 2.0"
+    },
+    {
+      "key": "6GfZwkgYdurx0JeKfVYIT9",
+      "project": "Solfácil Website 2025 Copy"
+    },
+    {
+      "key": "6D3pNiJDby3UkFuefLBBfu",
+      "project": "Solfácil Website 2025"
+    },
+    {
+      "key": "tfBXpDNQ7p6uvXRSfngBAz",
+      "project": "Blizzard World UI App"
+    },
+    {
+      "key": "6nRw6oXuVaKr4B5VVu1Er5",
+      "project": "Guia Prático Clube das Ferragens"
+    },
+    {
+      "key": "MBAZte7DHJJvoP76mLRdoR",
+      "project": "Proposta Comercial Arte MKT"
+    },
+    {
+      "key": "5JLmz3YFK5N4Lw3fuxlIG5",
+      "project": "Apresentações Lojas Descontão"
+    },
+    {
+      "key": "YMem7K2iOHw1QvOKutPLFW",
+      "project": "LP AM Leandro 2025"
+    },
+    {
+      "key": "4Szyfg7IWy7TkmJnNSxeqS",
+      "project": "Apresentação Alcacer 2026"
+    },
+    {
+      "key": "t0TEIBledHSwvhyMWqmc1t",
+      "project": "Arquivos Brands Arte MKT"
+    },
+    {
+      "key": "s3RO0v0mW6Txyb8bw8onEh",
+      "project": "MyPersonAI Social Media"
+    },
+    {
+      "key": "zPFUNxviOmo3PvSZ39u9XC",
+      "project": "Apresentação Regis Corretora"
+    },
+    {
+      "key": "uBwGaaWWbonlPLT6fWasZr",
+      "project": "Solfácil Website 2025"
+    },
+    {
+      "key": "1EhKPW9Za8YvJ243EmiVMe",
+      "project": "Template Onboarding Solfácil 2026"
+    },
+    {
+      "key": "aT2eCxHUafjJnjZ9bc1sI5",
+      "project": "Landing Pages Solfácil 2026"
+    },
+    {
+      "key": "7HcfKpBhH0DfufywuuBiYg",
+      "project": "One Pager Solfácil"
+    },
+    {
+      "key": "awFcfV6VTjWYsgbKWXBYtm",
+      "project": "Landing Pages Solfácil"
+    },
+    {
+      "key": "MfQQF82oV5kpiqEKfOvyBg",
+      "project": "Relatório Mensal de Energia | Solfácil"
+    },
+    {
+      "key": "lBKp8NeX6fQz0lE1LBhG1S",
+      "project": "Materiais de Especificação Técnica Solfácil"
+    },
+    {
+      "key": "QR6CYPztID44td3TfGRsij",
+      "project": "Templates E mail Carreiras Solfácil"
+    },
+    {
+      "key": "5MhHJswXZBt6YKeLH0gPcx",
+      "project": "Apresentação Comercial Solfácil 2025"
+    }
   ]
 }
