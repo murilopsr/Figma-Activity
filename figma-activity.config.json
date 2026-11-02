@@ -2,11 +2,17 @@
   "output": "public/figma-activity.json",
   "onlyMe": true,
   "keepDays": 800,
+  "modifiedEvents": true,
+  "teamIds": [
+    "1606104166296410075",
+    "1555209071405462384",
+    "1583531390841499425"
+  ],
+  "teamDeep": false,
   "files": [
     { "key": "tfBXpDNQ7p6uvXRSfngBAz", "project": "Blizzard World" },
     { "key": "oqfonVDGJSyhx2Uz371bXO", "project": "Klaze Cargo" },
     { "key": "6GfZwkgYdurx0JeKfVYIT9", "project": "Solfácil" },
     { "key": "Jxg8qKInRP1zM8ky4L6YkK", "project": "Death Stranding 2" }
-  ],
-  "projectIds": []
+  ]
 }
