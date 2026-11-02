@@ -67,6 +67,20 @@ async function filesFromProjects(projectIds) {
     return out
 }
 
+// Descobre todos os projetos (pastas) de cada time informado em "teamIds"
+async function projectsFromTeams(teamIds, deep) {
+    const out = []
+    for (const teamId of teamIds) {
+        try {
+            const data = await figma("/teams/" + teamId + "/projects")
+            for (const p of data.projects || []) out.push({ id: p.id, project: p.name, deep: deep })
+        } catch (e) {
+            console.warn("Não consegui listar os projetos do time " + teamId + ": " + e.message)
+        }
+    }
+    return out
+}
+
 async function versionsOf(key) {
     const all = []
     let url = "/files/" + key + "/versions"
@@ -84,7 +98,9 @@ async function commentsOf(key) {
 }
 
 const files = [...(config.files || [])]
-if (config.projectIds && config.projectIds.length) files.push(...(await filesFromProjects(config.projectIds)))
+const projectList = [...(config.projectIds || [])]
+if (config.teamIds && config.teamIds.length) projectList.push(...(await projectsFromTeams(config.teamIds, config.teamDeep === true)))
+if (projectList.length) files.push(...(await filesFromProjects(projectList)))
 
 // remove arquivos duplicados (se o mesmo arquivo vier de "files" e de um projeto, junta as informações)
 const byKey = new Map()
