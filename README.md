@@ -88,3 +88,19 @@ sozinho todos os projetos e arquivos dele.
   arquivos que outras pessoas compartilharam com você. Esses sempre buscam
   versões e comentários.
 - Escopos do token: os de antes + `folders:read` (e `file_metadata:read`).
+
+## Datas de criação e última edição (metaEvents)
+
+Ligado por padrão (`"metaEvents": true`). Para cada arquivo, o script lê os
+metadados e registra:
+
+- **touched:** o dia da última edição do arquivo;
+- **created:** o dia em que o arquivo foi criado (se o Figma informar).
+
+Com `onlyMe: true`, só entram os pontos em que **você** é quem editou/criou
+(quando o Figma informa o autor). Isso espalha pontos reais pelo ano, mas é só um
+ponto por arquivo e por data: não mostra quanto você trabalhou em cada dia.
+
+No log, a linha "Campos do metadata: ..." lista o que o Figma devolveu. Se não
+houver `created_at` na lista, só a data da última edição é usada. Requer o escopo
+`file_metadata:read`.
