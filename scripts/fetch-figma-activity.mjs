@@ -23,6 +23,7 @@ const config = JSON.parse(await readFile(CONFIG_PATH, "utf8"))
 const OUTPUT = config.output || "public/figma-activity.json"
 const ONLY_ME = config.onlyMe !== false // por padrão conta só a sua atividade
 const KEEP_DAYS = config.keepDays || 800
+const MODIFIED = config.modifiedEvents === true // conta a "última modificação" dos arquivos de projectIds
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 
@@ -55,9 +56,10 @@ async function filesFromProjects(projectIds) {
     for (const p of projectIds) {
         const id = typeof p === "string" ? p : p.id
         const label = typeof p === "string" ? undefined : p.project
+        const deep = typeof p === "object" && p.deep === true // true = também busca versões e comentários de cada arquivo
         try {
             const data = await figma("/projects/" + id + "/files")
-            for (const f of data.files || []) out.push({ key: f.key, project: label || data.name || id })
+            for (const f of data.files || []) out.push({ key: f.key, project: label || data.name || id, modified: f.last_modified, modifiedOnly: !deep })
         } catch (e) {
             console.warn("Não consegui listar o projeto " + id + ": " + e.message)
         }
@@ -84,9 +86,14 @@ async function commentsOf(key) {
 const files = [...(config.files || [])]
 if (config.projectIds && config.projectIds.length) files.push(...(await filesFromProjects(config.projectIds)))
 
-// remove arquivos duplicados
-const seen = new Set()
-const uniqueFiles = files.filter((f) => (seen.has(f.key) ? false : seen.add(f.key)))
+// remove arquivos duplicados (se o mesmo arquivo vier de "files" e de um projeto, junta as informações)
+const byKey = new Map()
+for (const f of files) {
+    const prev = byKey.get(f.key)
+    if (!prev) byKey.set(f.key, { ...f })
+    else if (f.modified && !prev.modified) prev.modified = f.modified
+}
+const uniqueFiles = [...byKey.values()]
 if (uniqueFiles.length === 0) {
     console.error('Nenhum arquivo configurado. Preencha "files" em ' + CONFIG_PATH + ".")
     process.exit(1)
@@ -104,6 +111,14 @@ const byId = new Map(existing.filter((e) => e.id).map((e) => [e.id, e]))
 let added = 0
 for (const f of uniqueFiles) {
     const project = f.project || "Figma"
+    // "Última modificação" do arquivo: um ponto por arquivo e por dia em que ele foi editado.
+    // Rodando todo dia, isso vai montando o histórico. Não dá para saber QUEM editou.
+    if (MODIFIED && f.modified && !isNaN(new Date(f.modified).getTime())) {
+        const mid = "m:" + f.key + ":" + f.modified
+        if (!byId.has(mid)) added++
+        byId.set(mid, { id: mid, t: f.modified, project: project, kind: "modified" })
+    }
+    if (f.modifiedOnly) continue
     try {
         for (const v of await versionsOf(f.key)) {
             if (myId && (!v.user || v.user.id !== myId)) continue
