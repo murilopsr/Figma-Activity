@@ -23,6 +23,7 @@ const config = JSON.parse(await readFile(CONFIG_PATH, "utf8"))
 const OUTPUT = config.output || "public/figma-activity.json"
 const ONLY_ME = config.onlyMe !== false // por padrão conta só a sua atividade
 const KEEP_DAYS = config.keepDays || 800
+const META = config.metaEvents !== false // lê datas de criação e última edição de cada arquivo
 const MODIFIED = config.modifiedEvents === true // conta a "última modificação" dos arquivos de projectIds
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
@@ -92,6 +93,11 @@ async function versionsOf(key) {
     return all
 }
 
+async function metaOf(key) {
+    const data = await figma("/files/" + key + "/meta")
+    return data.file || data
+}
+
 async function commentsOf(key) {
     const data = await figma("/files/" + key + "/comments")
     return data.comments || []
@@ -125,6 +131,7 @@ try {
 const byId = new Map(existing.filter((e) => e.id).map((e) => [e.id, e]))
 
 let added = 0
+let metaLogged = false
 for (const f of uniqueFiles) {
     const project = f.project || "Figma"
     // "Última modificação" do arquivo: um ponto por arquivo e por dia em que ele foi editado.
@@ -133,6 +140,32 @@ for (const f of uniqueFiles) {
         const mid = "m:" + f.key + ":" + f.modified
         if (!byId.has(mid)) added++
         byId.set(mid, { id: mid, t: f.modified, project: project, kind: "modified" })
+    }
+    // Metadados do arquivo: dia da última edição e dia de criação (cobrem o ano todo, um ponto por arquivo)
+    if (META) {
+        try {
+            const m = await metaOf(f.key)
+            if (!metaLogged) {
+                console.log("Campos do metadata: " + Object.keys(m).join(", "))
+                metaLogged = true
+            }
+            const mine = (u) => !myId || !u || u.id === myId
+            const valid = (t) => t && !isNaN(new Date(t).getTime())
+            const touched = m.last_touched_at || m.lastTouchedAt
+            if (valid(touched) && mine(m.last_touched_by || m.lastTouchedBy)) {
+                const id = "t:" + f.key + ":" + touched
+                if (!byId.has(id)) added++
+                byId.set(id, { id: id, t: touched, project: project, kind: "touched" })
+            }
+            const created = m.created_at || m.createdAt
+            if (valid(created) && mine(m.creator)) {
+                const id = "n:" + f.key
+                if (!byId.has(id)) added++
+                byId.set(id, { id: id, t: created, project: project, kind: "created" })
+            }
+        } catch (e) {
+            console.warn("[" + project + "] metadados: " + e.message)
+        }
     }
     if (f.modifiedOnly) continue
     try {
