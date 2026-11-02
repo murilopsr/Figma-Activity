@@ -2,6 +2,7 @@
   "output": "public/figma-activity.json",
   "onlyMe": true,
   "keepDays": 800,
+  "metaEvents": true,
   "files": [
     {
       "key": "x85mWKP3bYKhbywJjOfVt1",
