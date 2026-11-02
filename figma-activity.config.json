@@ -1,0 +1,10 @@
+{
+  "output": "public/figma-activity.json",
+  "onlyMe": true,
+  "keepDays": 800,
+  "files": [
+    { "key": "COLE_A_CHAVE_DO_ARQUIVO", "project": "Solfácil" },
+    { "key": "COLE_A_CHAVE_DO_ARQUIVO", "project": "Blizzard World" }
+  ],
+  "projectIds": []
+}
