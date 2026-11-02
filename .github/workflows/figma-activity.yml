@@ -1,0 +1,36 @@
+name: Atualizar atividade do Figma
+
+on:
+  schedule:
+    - cron: "17 6 * * *" # todo dia, 06:17 UTC
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Coletar versões e comentários
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        run: node scripts/fetch-figma-activity.mjs
+
+      - name: Salvar se mudou
+        run: |
+          if [ -n "$(git status --porcelain public/figma-activity.json)" ]; then
+            git config user.name "figma-activity-bot"
+            git config user.email "figma-activity-bot@users.noreply.github.com"
+            git add public/figma-activity.json
+            git commit -m "chore: atualizar atividade do Figma"
+            git push
+          else
+            echo "Sem mudanças."
+          fi
