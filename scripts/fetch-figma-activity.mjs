@@ -38,7 +38,7 @@ async function figma(path, attempt = 0) {
     }
     if (!res.ok) {
         const body = await res.text().catch(() => "")
-        const err = new Error("Figma API " + res.status + " em " + path + ": " + body.slice(0, 200))
+        const err = new Error("Figma API " + res.status + " em " + path + ": " + body.slice(0, 2000))
         err.status = res.status
         throw err
     }
