@@ -1,4 +1,3 @@
-[README.md](https://github.com/user-attachments/files/34299390/README.md)
 # Figma Activity
 
 Coleta suas versões, comentários e datas de edição do Figma e publica um JSON que o
