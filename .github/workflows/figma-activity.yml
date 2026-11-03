@@ -18,9 +18,20 @@ jobs:
         with:
           node-version: 20
 
-      - name: Coletar versões e comentários
+      - name: Preparar config (secret FIGMA_CONFIG)
+        env:
+          FIGMA_CONFIG: ${{ secrets.FIGMA_CONFIG }}
+        run: |
+          if [ -z "$FIGMA_CONFIG" ]; then
+            echo "O secret FIGMA_CONFIG não está definido."
+            exit 1
+          fi
+          printf '%s' "$FIGMA_CONFIG" > "$RUNNER_TEMP/figma-config.json"
+
+      - name: Coletar versões, comentários e datas
         env:
           FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+          CONFIG_PATH: ${{ runner.temp }}/figma-config.json
         run: node scripts/fetch-figma-activity.mjs
 
       - name: Salvar se mudou
